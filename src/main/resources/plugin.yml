@@ -1,0 +1,4 @@
+main: net.lordsofcode.tenjava.Plugin
+name: Plugin
+version: ${project.version}
+author: minnymin3
