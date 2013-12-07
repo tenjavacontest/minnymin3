@@ -15,10 +15,24 @@ public class Loric extends JavaPlugin {
 		getCommand("loric").setExecutor(new LoricCommand(this));
 		if (Bukkit.getWorld("loric") == null) {
 			World world = Bukkit.createWorld(new WorldCreator("loric"));
-			world.setMonsterSpawnLimit(10000);
-			world.setTicksPerMonsterSpawns(1);
+			world.setMonsterSpawnLimit(1000);
+			world.setTicksPerMonsterSpawns(10);
 			world.setPVP(false);
 		}
+		Config conf = new Config("game.yml", this);
+		conf.saveDefaultConfig();
+		if (conf.getConfig().contains("players")) {
+			game.players = conf.getConfig().getStringList("players");
+			game.dead = conf.getConfig().getInt("dead");
+		}
+	}
+	
+	@Override
+	public void onDisable() {
+		Config conf = new Config("game.yml", this);
+		conf.getConfig().set("players", game.players);
+		conf.getConfig().set("dead", game.dead);
+		conf.saveConfig();
 	}
 	
 }

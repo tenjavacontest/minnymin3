@@ -28,8 +28,8 @@ public class LoricListener implements Listener {
 
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
-		if (event.getTo().getX() > 1000 || event.getTo().getX() < -1000
-				|| event.getTo().getZ() > 1000 || event.getTo().getZ() < -1000) {
+		if (plugin.game.isInGame(event.getPlayer()) && (event.getTo().getX() > 1000 || event.getTo().getX() < -1000
+				|| event.getTo().getZ() > 1000 || event.getTo().getZ() < -1000)) {
 			event.getPlayer().sendMessage("You have reached the edge");
 			event.setCancelled(true);
 		}

@@ -31,39 +31,61 @@ public class LoricCommand implements CommandExecutor {
 			} else if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("join")) {
 					if (plugin.game.isInGame(player)) {
-						sender.sendMessage("You are already on earth. You are number "
+						sender.sendMessage(ChatColor.RED
+								+ "You are already on earth. You are number "
 								+ plugin.game.getNumber(player));
 					} else if (plugin.game.addPlayer(player)) {
-						sender.sendMessage("Going to the planet Earth...");
+						sender.sendMessage(ChatColor.GRAY
+								+ "Going to the planet Earth...");
 					} else {
-						sender.sendMessage("You can't join the battle...");
+						sender.sendMessage(ChatColor.RED
+								+ "You can't join the battle...");
 					}
 				} else if (args[0].equalsIgnoreCase("regen")) {
 					if (player.hasPermission("loric.regen")) {
-						World world = Bukkit.getWorld("loric");
-						for (Player p : world.getPlayers()) {
-							p.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
-						}
-						Bukkit.unloadWorld(world, false);
-						try {
-							FileUtils.deleteDirectory(world.getWorldFolder());
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						Bukkit.createWorld(new WorldCreator("loric"));
+						regenWorld();
 					} else {
-						player.sendMessage(ChatColor.RED + "You don't have permission!");
+						player.sendMessage(ChatColor.RED
+								+ "You don't have permission!");
 					}
 				}
 			}
 		} else {
-			sender.sendMessage("In game command only");
+			if (args.length == 0) {
+				sendUsage(sender);
+			} else if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("regen")) {
+					regenWorld();
+				}
+			}
 		}
 		return true;
 	}
-	
+
 	public void sendUsage(CommandSender sender) {
-		
+
+	}
+	
+	public void regenWorld() {
+		Bukkit.broadcastMessage(ChatColor.GRAY
+				+ "[LORIC] World being regenerated. Expect lag for a bit...");
+		World world = Bukkit.getWorld("loric");
+		for (Player p : world.getPlayers()) {
+			p.teleport(Bukkit.getWorlds().get(0)
+					.getSpawnLocation());
+		}
+		Bukkit.unloadWorld(world, false);
+		try {
+			FileUtils.deleteDirectory(world.getWorldFolder());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		World newWorld = Bukkit.createWorld(new WorldCreator(
+				"loric"));
+		newWorld.setMonsterSpawnLimit(1000);
+		newWorld.setTicksPerMonsterSpawns(10);
+		newWorld.setPVP(false);
+		Bukkit.broadcastMessage(ChatColor.GREEN + "[LORIC] Regen done!");
 	}
 
 }
