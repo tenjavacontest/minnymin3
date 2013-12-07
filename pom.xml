@@ -5,7 +5,7 @@
     <bukkit.version>1.7.2-R0.1-SNAPSHOT</bukkit.version>
   </properties>
   
-  <artifactId>PluginName</artifactId>
+  <artifactId>Loric</artifactId>
   <version>1.0</version>
   <groupId>net.lordsofcode.tenjava</groupId>
   
@@ -28,6 +28,12 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
+      <version>${bukkit.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>craftbukkit</artifactId>
       <version>${bukkit.version}</version>
       <scope>provided</scope>
     </dependency>

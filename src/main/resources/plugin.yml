@@ -5,3 +5,10 @@ author: minnymin3
 commands:
   loric:
     description: The main command for the loric plugin
+permissions:
+  loric.join:
+    default: true
+    description: Allows player to join games
+  loric.admin:
+    default: op
+    description: Access to all the admin commands

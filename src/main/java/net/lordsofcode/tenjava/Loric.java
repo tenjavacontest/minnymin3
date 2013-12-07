@@ -1,21 +1,23 @@
 package net.lordsofcode.tenjava;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Loric extends JavaPlugin {
 
-	public List<String> players;
+	public GameData game;
 	
 	public void onEnable() {
-		players = new ArrayList<String>();
+		game = new GameData(this);
+		getServer().getPluginManager().registerEvents(new LoricListener(this), this);
 		getCommand("loric").setExecutor(new LoricCommand(this));
 		if (Bukkit.getWorld("loric") == null) {
-			Bukkit.createWorld(new WorldCreator("loric"));
+			World world = Bukkit.createWorld(new WorldCreator("loric"));
+			world.setMonsterSpawnLimit(10000);
+			world.setTicksPerMonsterSpawns(1);
+			world.setPVP(false);
 		}
 	}
 	
