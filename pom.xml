@@ -5,9 +5,9 @@
     <bukkit.version>1.7.2-R0.1-SNAPSHOT</bukkit.version>
   </properties>
   
-  <artifactId>Loric</artifactId>
+  <artifactId>DragonBuddy</artifactId>
   <version>1.0</version>
-  <groupId>net.lordsofcode.tenjava</groupId>
+  <groupId>net.lordsofcode.dragonbuddy</groupId>
   
   <licenses>
     <license>
