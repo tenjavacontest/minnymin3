@@ -1,4 +1,7 @@
-main: net.lordsofcode.tenjava.Plugin
-name: Plugin
+main: net.lordsofcode.tenjava.Loric
+name: Loric
 version: ${project.version}
 author: minnymin3
+commands:
+  loric:
+    description: The main command for the loric plugin
